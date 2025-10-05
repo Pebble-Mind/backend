@@ -1,0 +1,19 @@
+[project]
+name = "pebblemind"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "flask>=3.1.2",
+    "google",
+    "google-api-python-client",
+    "google-auth-httplib2",
+    "google-auth-oauthlib",
+    "langchain>=0.3.27",
+    "langchain-core>=0.3.78",
+    "langchain-openai>=0.3.34",
+    "langgraph>=0.6.8",
+    "requests>=2.32.5",
+]
