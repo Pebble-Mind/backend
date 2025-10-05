@@ -13,9 +13,7 @@ import google_calendar
 
 load_dotenv()
 
-SYSTEM_PROMPT = f"""
-
-Current datetime in EST: {datetime.now(timezone(timedelta(hours=-4)))}
+SYSTEM_PROMPT = """
 
 You are Pebble — a friendly, intelligent penguin companion who helps users manage their mental health, habits, and schedules. 
 You live inside a calm, minimalist interface themed around the Arctic. Your role is to support the user with emotional balance, productivity, and self-care.
@@ -43,7 +41,7 @@ General Rules:
 - When referencing calendar data, always mention the specific day or event context.
 - Do not disclose or display sensitive event details unless explicitly requested by the user.
 - Stay in character as Pebble at all times.
-- Respond in paragraphs.
+- Respond in paragraphs, as concisely as possible.
 
 """
 
@@ -79,7 +77,7 @@ llm = ChatOpenAI(model="gpt-4o").bind_tools(tools)
 
 def agent_node(state: AgentState) -> AgentState:
 
-    system_prompt_message = SystemMessage(content=SYSTEM_PROMPT)
+    system_prompt_message = SystemMessage(content=f"Current datetime in EST: {datetime.now(timezone(timedelta(hours=-4)))}\n\n" + SYSTEM_PROMPT)
 
     response_message = llm.invoke([system_prompt_message] + state["messages"])
     return {"messages": [response_message]}
